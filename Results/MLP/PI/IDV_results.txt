@@ -1,0 +1,25 @@
+Data  :
+	Test Set : 10.00% (size) : (99, 229)
+	Train Set : 90.00% (size) : (99, 2067)
+
+Parameters :
+	Layer dimensions :[99, 33, 33, 33, 33, 1]
+	Optimizer :adam
+	Learning rate : 0.01
+	Number of Iterations : 20000
+	Decay Function :schedule_lr_decay
+	L2 regularization parameter :0.8
+
+Costs :
+	Cost after iteration 0: 1.434296217430275
+	Cost after iteration 19999: 0.09260090448388214
+
+Training time : 3.97 minutes
+Train Set :
+		TP TN FP FN :
+		985 1014 30 38
+		Accuracy : 96.71%
+Test Set :
+		TP TN FP FN :
+		95 89 18 27
+		Accuracy : 80.35%
