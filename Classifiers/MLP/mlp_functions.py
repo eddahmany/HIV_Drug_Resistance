@@ -4,6 +4,8 @@ from math import sqrt
 import numpy as np
 import matplotlib.pyplot as plt
 
+import Data.dataset
+from Data import dataset
 
 
 def initialize_parameters_deep(layer_dims):
@@ -157,7 +159,6 @@ def compute_cost_with_regularization(AL, Y, parameters, lambd):
 
     L2_regularization_cost = lambd / (2 * m) * S
 
-
     cost = cross_entropy_cost + L2_regularization_cost
 
     return cost
@@ -187,7 +188,7 @@ def L_model_backward(AL, Y, caches, lambd):
 
 
 def forward_propagation_with_dropout(X, parameters, keep_prob=0.5):
-    np.random.seed(1)
+
 
     cache = {}
     A = X
@@ -344,15 +345,20 @@ def decay_name(decay):
     else : return
 
 
-def L_layer_model(X, Y, layers_dims, optimizer, learning_rate, num_iterations, name_file, beta = 0.9,
-                  beta1 = 0.9, beta2 = 0.999, epsilon = 1e-8, print_cost=False, keep_prob=1, lambd=0, decay=None, decay_rate=1,
+def train_model(X, Y, layers_dims, optimizer, learning_rate, encoding, num_iterations, name_file, beta = 0.9,
+                  beta1 = 0.9, beta2 = 0.999, epsilon = 1e-8, print_cost=False, printing_step = 1, keep_prob=1, lambd=0, decay=None, decay_rate=1,
                   ):
     start_time = time.time()
+
     print("Training the model :")
     np.random.seed(1)
     costs = []  # keep track of cost
     t = 0
     learning_rate0 = learning_rate
+
+    #layers_dims = [layers_dims[0],int(layers_dims[0]/10), 1]
+
+    print(">>>>>>>> layers_dim :"+ str(layers_dims))
     parameters = initialize_parameters_deep(layers_dims)
 
     # Initialize the optimizer
@@ -366,9 +372,9 @@ def L_layer_model(X, Y, layers_dims, optimizer, learning_rate, num_iterations, n
 
     with open(path_file + name_file, 'a') as file:
         file.write('Parameters :\n')
-        parameters_title = "\tLayer dimensions :"+ str(layers_dims)+ "\n\tOptimizer :" + str(optimizer) + "\n\tLearning rate : " + str(learning_rate) + "\n\tNumber of Iterations : "+str(num_iterations) + "\n\tDecay Function :" + str(decay_name(decay)) +'\n\tL2 Regulization parameter :'+ str(lambd)+ '\n\n'
+        parameters_title = "\tLayer dimensions : "+ str(layers_dims)+ "\n\tOptimizer : " + str(optimizer) + "\n\tLearning rate : " + str(learning_rate) + "\n\tNumber of Epochs : "+str(num_iterations) + "\n\tDecay Function : " + str(decay_name(decay)) +'\n\tL2 regularization parameter : '+ str(lambd)+ '\n\n'
         file.write(parameters_title)
-        file.write('Costs :\n')
+        file.write('Training :\n')
 
         # Loop (gradient descent)
         iterations_rate = 0
@@ -408,20 +414,26 @@ def L_layer_model(X, Y, layers_dims, optimizer, learning_rate, num_iterations, n
                                                                      t, learning_rate, beta1, beta2, epsilon)
 
             if decay:
+
                 learning_rate = decay(learning_rate0, i, decay_rate)
-            if print_cost and i % 100 == 0 or i == num_iterations - 1:
-                cost_str = "\tCost after iteration {}: {}".format(i, np.squeeze(cost))
+            if print_cost and i % printing_step == 0 or i == num_iterations - 1:
+                my_accuracy =accuracy(parameters, X, Y)[0]
+                cost_str = "\tEpoch {}:\t\t\tloss : {:.7f} \t-\t accuracy : {:.5f}%".format(i, np.squeeze(cost), my_accuracy)
                 print(cost_str)
-                if i % (num_iterations - 1) == 0 :
-                    file.write(cost_str + '\n')
-            if i % 100 == 0 or i == num_iterations:
-                costs.append(cost)
+                file.write(cost_str + '\n')
+
         end_time = time.time()
 
         execution_time = end_time - start_time
-        execution_time_minutes = execution_time / 60
-        file.write("\nTraining time : {:.2f} minutes\n".format(execution_time_minutes))
-        return parameters, costs
+
+        minutes = execution_time // 60
+        seconds = execution_time % 60
+
+        # Format the string in "X min Y s" format
+        execution_time_str = f"{int(minutes)} min {seconds:.2f} s"
+
+        file.write("\tTraining time : "+execution_time_str + "\n\n")
+        return parameters
 
 
 def update_lr(learning_rate0, epoch_num, decay_rate):
@@ -442,4 +454,21 @@ def predict(parameters, X):
     AL, cache = L_model_forward(X, parameters)
     predictions = (AL > 0.5)
     return np.array(predictions)
+
+def accuracy(parameters, X, Y):
+    predictions= predict(parameters, X)
+    accuracy, tp, tn, fp, fn = dataset.accuracy(predictions, Y, 0)
+    return accuracy, tp, tn, fp, fn
+
+
+def evaluate(name_file, X_test, Y_test,  parameters):
+    acc, tp, tn, fp, fn = accuracy(parameters, X_test, Y_test)
+    path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/' + str(name_file)
+    with open(path_file, 'a') as file:
+        file.write("Evaluating :\n")
+        file.write("\tTP TN FP FN :\n".format(tp, tn, fp, fn))
+        file.write("\t{} {} {} {}\n".format(tp, tn, fp, fn))
+        file.write("\tAccuracy : {:.2f}%\n".format(acc))
+
+
 

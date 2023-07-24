@@ -1,25 +1,108 @@
 import numpy as np
 
-#Consensus B Amino Acid Sequences
+def one_hot_encoding(file, index_labels):
+    # Consensus B Amino Acid Sequences
 
+    integrase_consensus = "FLDGIDKAQEEHEKYHSNWRAMASDFNLPPVVAKEIVASCDKCQLKGEAMHGQVDCSPGIWQLDCTHLEGKIILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTIHTDNGSNFTSTTVKAACWWAGIKQEFGIPYNPQSQGVVESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNFKRKGGIGGYSAGERIVDIIATDIQTKELQKQITKIQNFRVYYRDSRDPLWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRDYGKQMAGDDCVASRQDED"
 
-integrase_consensus = "FLDGIDKAQEEHEKYHSNWRAMASDFNLPPVVAKEIVASCDKCQLKGEAMHGQVDCSPGIWQLDCTHLEGKIILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTIHTDNGSNFTSTTVKAACWWAGIKQEFGIPYNPQSQGVVESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNFKRKGGIGGYSAGERIVDIIATDIQTKELQKQITKIQNFRVYYRDSRDPLWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRDYGKQMAGDDCVASRQDED"
+    protease_consensus = "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF"
 
-protease_consensus = "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF"
+    RT_consensus = "PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKIGPENPYNTPVFAIKKKDSTKWRKLVDFRELNKRTQDFWEVQLGIPHPAGLKKKKSVTVLDVGDAYFSVPLDKDFRKYTAFTIPSINNETPGIRYQYNVLPQGWKGSPAIFQSSMTKILEPFRKQNPDIVIYQYMDDLYVGSDLEIGQHRTKIEELRQHLLRWGFTTPDKKHQKEPPFLWMGYELHPDKWT"
 
-capsid_consensus ="PIVQNLQGQMVHQAISPRTLNAWVKVVEEKAFSPEVIPMFSALSEGATPQDLNTMLNTVGGHQAAMQMLKETINEEAAEWDRLHPVHAGPIAPGQMREPRGSDIAGTTSTLQEQIGWMTNNPPIPVGEIYKRWIILGLNKIVRMYSPTSILDIRQGPKEPFRDYVDRFYKTLRAEQASQEVKNWMTETLLVQNANPDCKTILKALGPAATLEEMMTACQGVGGPGHKARVL"
-
-
-
-RT_consensus = "PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKIGPENPYNTPVFAIKKKDSTKWRKLVDFRELNKRTQDFWEVQLGIPHPAGLKKKKSVTVLDVGDAYFSVPLDKDFRKYTAFTIPSINNETPGIRYQYNVLP" \
-     "QGWKGSPAIFQSSMTKILEPFRKQNPDIVIYQYMDDLYVGSDLEIGQHRTKIEELRQHLLRWGFTTPDKKHQKEPPFLWMGYELHPDKWTVQPIVLPEKD" \
-     "SWTVNDIQKLVGKLNWASQIYAGIKVKQLCKLLRGTKALTEVIPLTEEAELELAENREILKEPVHGVYYDPSKDLIAEIQKQGQGQWTYQIYQEPFKNLK" \
-     "TGKYARMRGAHTNDVKQLTEAVQKIATESIVIWGKTPKFKLPIQKETWEAWWTEYWQATWIPEWEFVNTPPLVKLWYQLEKEPIVGAETFYVDGAANRET" \
-     "KLGKAGYVTDRGRQKVVSLTDTTNQKTELQAIHLALQDSGLEVNIVTDSQ" \
-     "YALGIIQAQPDKSESELVSQIIEQLIKKEKVYLAWVPAHKGIGGNEQVDKLVSAGIRKVL"
-
-def read_dataset(file, consensus, index_labels):
     drug_class = file.split("_")[0]
+    if drug_class == 'PI':
+        consensus = protease_consensus
+    elif drug_class == 'INI':
+        consensus = integrase_consensus
+    else:
+        consensus = RT_consensus
+
+    start_char = ord('A')  # Code ASCII de la première lettre ('A')
+    end_char = ord('Z')  # Code ASCII de la dernière lettre ('Z')
+    letter_to_int = {chr(letter_code): idx for idx, letter_code in enumerate(range(start_char, end_char + 1))}
+    letter_to_int['.'] = len(letter_to_int)
+    letter_to_int['*'] = len(letter_to_int)
+    letter_to_int['~'] = len(letter_to_int)
+    letter_to_int['#'] = len(letter_to_int)
+
+    print("mon dictionnaire : "+str(letter_to_int))
+
+    n = len(letter_to_int)
+
+    print(">>>>>> Reading Dataset :")
+    file_path = str('/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Data/' + file)
+
+    features = []
+    labels = []
+
+    with open(file_path, 'r') as file:
+        i = 0
+        first_line = file.readline().strip().split('\t')
+        feature_name = first_line[1 + index_labels]
+        print("drug class : " + drug_class)
+        next(file)  # skip the first line
+        for line in file:
+            line = line.strip().split('\t')
+            if line[1 + index_labels] != 'NA':
+                labels.append(float(line[1 + index_labels]))
+                if len(consensus) == 99:
+                    p_values = line[9:108]  # Extract values from P1 to P99 (9:108 to include P1 to P99)
+                elif len(consensus) == 288:
+                    p_values = line[6: 6 + 288]  # Extract values from P1 to P288
+                else:
+                    if drug_class == 'NNRTI':
+                        p_values = line[5: 5 + 240]
+                    elif drug_class == 'NRTI':
+                        p_values = line[7: 7 + 240]
+
+                # One-hot encoding
+                encoded_sequence = []
+                for i, value in enumerate(p_values):
+                    one_hot_vector = [0] * n
+                    if value == '-':
+                        one_hot_vector[letter_to_int[consensus[i]]] = 1
+                    else :
+                        for c in value :
+                            one_hot_vector[letter_to_int[c]] = 1
+                    encoded_sequence.append(one_hot_vector)
+                encoded_sequence = np.array(encoded_sequence).flatten()
+
+                features.append(encoded_sequence)
+
+    labels = np.where(np.array(labels) < 3.5, 0, 1)
+    labels = labels.reshape(1, labels.shape[0])
+    features = np.array(features).T
+    return features, labels
+
+def get_drug_name(file, index_labels):
+    file_path = str('/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Data/' + file)
+    with open(file_path, 'r') as file:
+        first_line = file.readline().strip().split('\t')
+        return first_line[1 + index_labels]
+
+def encoding_name(encoding):
+
+    if encoding ==integer_encoding:
+        return 'integer_encoding'
+    else : return 'one_hot_encoding'
+
+def integer_encoding(file, index_labels):
+    # Consensus B Amino Acid Sequences
+
+    integrase_consensus = "FLDGIDKAQEEHEKYHSNWRAMASDFNLPPVVAKEIVASCDKCQLKGEAMHGQVDCSPGIWQLDCTHLEGKIILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTIHTDNGSNFTSTTVKAACWWAGIKQEFGIPYNPQSQGVVESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNFKRKGGIGGYSAGERIVDIIATDIQTKELQKQITKIQNFRVYYRDSRDPLWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRDYGKQMAGDDCVASRQDED"
+
+    protease_consensus = "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF"
+
+    RT_consensus = "PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKIGPENPYNTPVFAIKKKDSTKWRKLVDFRELNKRTQDFWEVQLGIPHPAGLKKKKSVTVLDVGDAYFSVPLDKDFRKYTAFTIPSINNETPGIRYQYNVLPQGWKGSPAIFQSSMTKILEPFRKQNPDIVIYQYMDDLYVGSDLEIGQHRTKIEELRQHLLRWGFTTPDKKHQKEPPFLWMGYELHPDKWT"
+
+    drug_class = file.split("_")[0]
+    if drug_class == 'PI':
+        consensus = protease_consensus
+    elif drug_class == 'INI':
+        consensus = integrase_consensus
+    else:
+        consensus = RT_consensus
+
     print(">>>>>> Reading Dataset :")
     file_path = str('/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Data/' + file)
 
@@ -30,6 +113,7 @@ def read_dataset(file, consensus, index_labels):
         i = 0
         first_line = file.readline().strip().split('\t')
         feature_name = first_line[1 + index_labels]
+        print("drug class : "+drug_class)
         next(file) # skip the first line
         for line in file :
             line = line.strip().split('\t')
@@ -58,7 +142,7 @@ def read_dataset(file, consensus, index_labels):
     labels = np.where(np.array(labels) < 3.5 , 0, 1)
     labels = labels.reshape(1, labels.shape[0])
     features = np.array(features).T
-    return features, labels, feature_name
+    return features, labels
 
 
 def compute_label_percentage(labels):
@@ -72,7 +156,7 @@ def compute_label_percentage(labels):
     return pourcentage_1, pourcentage_0
 
 
-def split_dataset(X, Y, test_size, file_name):
+def split_dataset(file_name, X, Y, test_size, encoding):
     print(">>>>>> Spliting Dataset :")
     m = X.shape[-1]
     num_test = int(m * test_size)
@@ -85,8 +169,12 @@ def split_dataset(X, Y, test_size, file_name):
     X_train = X[:,train_indices]
     X_test = X[:,test_indices]
     path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/'
+    print("\tTest Set : {:.2f}%".format(100 * test_size) + " (size) : " + str(X_test.shape) + '\n')
+    print("\tTrain Set : {:.2f}%".format(100 * (1 - test_size)) + " (size) : " + str(X_train.shape) + '\n\n')
+
     with open(path_file + file_name, 'w') as file:
         file.write('Data  :\n')
+        file.write('\tEncoding type : '+ encoding_name(encoding)+'\n')
         file.write("\tTest Set : {:.2f}%".format(100*test_size)+ " (size) : "+str(X_test.shape)+'\n')
         file.write("\tTrain Set : {:.2f}%".format(100*(1-test_size))+ " (size) : "+str(X_train.shape)+'\n\n')
 
@@ -97,7 +185,7 @@ def split_dataset(X, Y, test_size, file_name):
     return X_train, X_test, Y_train, Y_test
 
 
-def accuracy(predictions, labels,name_file, set_type):
+def accuracy(predictions, labels, set_type, name_file = None):
     if set_type == 0:
         dataset = "Train"
     else:
@@ -110,13 +198,13 @@ def accuracy(predictions, labels,name_file, set_type):
     fn = np.sum((predictions == 0) & (labels == 1))  # False Negatives
 
     accuracy = (tp + tn) / m * 100
-
-    path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/' + str(name_file)
-    with open(path_file, 'a') as file:
-        file.write("{} Set :\n".format(dataset))
-        file.write("\t\tTP TN FP FN :\n".format(tp, tn, fp, fn))
-        file.write("\t\t{} {} {} {}\n".format(tp, tn, fp, fn))
-        file.write("\t\tAccuracy : {:.2f}%\n".format( accuracy))
+    if name_file :
+        path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/' + str(name_file)
+        with open(path_file, 'a') as file:
+            file.write("{} Set :\n".format(dataset))
+            file.write("\t\tTP TN FP FN :\n".format(tp, tn, fp, fn))
+            file.write("\t\t{} {} {} {}\n".format(tp, tn, fp, fn))
+            file.write("\t\tAccuracy : {:.2f}%\n".format( accuracy))
 
     return accuracy, tp, tn, fp, fn
 
@@ -125,13 +213,28 @@ def f1_score(tp, fp, fn):
     recall = tp / (tp + fn)
     f1 = 2 * (precision * recall) / (precision + recall)
     return f1
-def statistics(filename , consensus, drug_number):
+def statistics(filename , drug_number):
     drug_class = filename.split("_")[0]
+
+    integrase_consensus = "FLDGIDKAQEEHEKYHSNWRAMASDFNLPPVVAKEIVASCDKCQLKGEAMHGQVDCSPGIWQLDCTHLEGKIILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTIHTDNGSNFTSTTVKAACWWAGIKQEFGIPYNPQSQGVVESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNFKRKGGIGGYSAGERIVDIIATDIQTKELQKQITKIQNFRVYYRDSRDPLWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRDYGKQMAGDDCVASRQDED"
+
+    protease_consensus = "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF"
+
+    RT_consensus = "PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKIGPENPYNTPVFAIKKKDSTKWRKLVDFRELNKRTQDFWEVQLGIPHPAGLKKKKSVTVLDVGDAYFSVPLDKDFRKYTAFTIPSINNETPGIRYQYNVLPQGWKGSPAIFQSSMTKILEPFRKQNPDIVIYQYMDDLYVGSDLEIGQHRTKIEELRQHLLRWGFTTPDKKHQKEPPFLWMGYELHPDKWT"
+
+    if drug_class == 'PI':
+        consensus = protease_consensus
+    elif drug_class == 'INI':
+        consensus = integrase_consensus
+    else:
+        consensus = RT_consensus
+
     path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Data/' + drug_class +  '_Statistics.txt'
     with open(path_file, 'w') as file:
         file.write(drug_class + ' Statistics : \n')
     for i in range(drug_number):
-        features, labels, drug_name = read_dataset(filename, consensus, i)
+        features, labels = one_hot_encoding(filename, i)
+        drug_name =  get_drug_name(filename, i)
         with open(path_file , 'a') as file:
             file.write(drug_name+' :\n')
             file.write("size of features :" + str(features.shape) + '\n')
@@ -143,13 +246,15 @@ def statistics(filename , consensus, drug_number):
 
 
 if __name__ == "__main__":
-    print(len(integrase_consensus))
+    statistics("PI_DataSet.txt", 8)
+    statistics("INI_DataSet.txt", 5)
+    statistics("NRTI_DataSet.txt", 6)
+    statistics("NNRTI_DataSet.txt", 4)
 
-    encoded_sequence = np.array([ord(c) for c in protease_consensus])
 
-    statistics("PI_DataSet.txt", protease_consensus, 8)
-    statistics("INI_DataSet.txt", integrase_consensus, 5)
-    statistics("NRTI_DataSet.txt", RT_consensus, 6)
-    statistics("NNRTI_DataSet.txt", RT_consensus, 4)
+
+
+
+
 
 

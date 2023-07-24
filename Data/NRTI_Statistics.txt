@@ -1,31 +1,31 @@
 NRTI Statistics : 
 3TC :
-size of features :(560, 2121)
+size of features :(7200, 2121)
 size of  labels :(1, 2121)
 percentage of resistant sequences : 63.74%
 percentage of non-resistant sequences : 36.26%
 ABC :
-size of features :(560, 2056)
+size of features :(7200, 2056)
 size of  labels :(1, 2056)
 percentage of resistant sequences : 49.71%
 percentage of non-resistant sequences : 50.29%
 AZT :
-size of features :(560, 2142)
+size of features :(7200, 2142)
 size of  labels :(1, 2142)
 percentage of resistant sequences : 44.91%
 percentage of non-resistant sequences : 55.09%
 D4T :
-size of features :(560, 2152)
+size of features :(7200, 2152)
 size of  labels :(1, 2152)
 percentage of resistant sequences : 13.85%
 percentage of non-resistant sequences : 86.15%
 DDI :
-size of features :(560, 2152)
+size of features :(7200, 2152)
 size of  labels :(1, 2152)
 percentage of resistant sequences : 5.76%
 percentage of non-resistant sequences : 94.24%
 TDF :
-size of features :(560, 1814)
+size of features :(7200, 1814)
 size of  labels :(1, 1814)
 percentage of resistant sequences : 8.88%
 percentage of non-resistant sequences : 91.12%

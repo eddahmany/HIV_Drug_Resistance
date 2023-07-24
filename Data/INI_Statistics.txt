@@ -1,26 +1,26 @@
 INI Statistics : 
 RAL :
-size of features :(288, 742)
+size of features :(8640, 742)
 size of  labels :(1, 742)
 percentage of resistant sequences : 37.06%
 percentage of non-resistant sequences : 62.94%
 EVG :
-size of features :(288, 682)
+size of features :(8640, 682)
 size of  labels :(1, 682)
 percentage of resistant sequences : 41.79%
 percentage of non-resistant sequences : 58.21%
 DTG :
-size of features :(288, 331)
+size of features :(8640, 331)
 size of  labels :(1, 331)
 percentage of resistant sequences : 14.50%
 percentage of non-resistant sequences : 85.50%
 BIC :
-size of features :(288, 205)
+size of features :(8640, 205)
 size of  labels :(1, 205)
 percentage of resistant sequences : 6.83%
 percentage of non-resistant sequences : 93.17%
 CAB :
-size of features :(288, 19)
+size of features :(8640, 19)
 size of  labels :(1, 19)
 percentage of resistant sequences : 36.84%
 percentage of non-resistant sequences : 63.16%

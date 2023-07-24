@@ -1,62 +1,78 @@
 
 
-from Data import dataset as data
+from Data import dataset as data, dataset
 
 import matplotlib.pyplot as plt
 import mlp_functions as mlp
 import numpy as np
 import time
 
-
-from Data.dataset import protease_consensus
-
-from Data.dataset import integrase_consensus
-
-from Data.dataset import RT_consensus
+from Data.dataset import encoding_name
 
 learning_rate = 0.01
 optimizer = 'adam'
 decay = mlp.schedule_lr_decay
-layers_dims = [33,33,33,33, 1]
-num_iterations = 20000
-lambd=0.8
+test_size = 0.1
 
-def apply_mlp_on_hiv_dataset(drugs_number, consensus, file):
-    for i in range (1, drugs_number):
-        start_time = time.time()
-        X, Y , feature_name = data.read_dataset(file, consensus, i)
-        print( "size of X :"+str(X.shape))
-        print( "size of  Y :"+str(Y.shape))
-        print("feature name :"+str(feature_name))
-        drug_class = file.split("_")[0]
-        file_path = drug_class + "/" + feature_name + '_results.txt'
+def apply_mlp_on_hiv_dataset(file, drug_index, learning_rate, optimizer, num_iterations, encoding, printing_step = 10):
 
-        X_train, X_test, Y_train, Y_test = data.split_dataset(X, Y, 0.1, file_path)
+    # Get the file path for writing results :
+    drug_name = data.get_drug_name(file, drug_index)
+    drug_class = file.split("_")[0]
+    file_path = drug_class + "/" + encoding_name(encoding) + "/" +   drug_name + '_results.txt'
 
-        layers_dims.insert(0,X.shape[0])
+    # Preparing Data :
+    X, Y  = encoding(file, drug_index)
+    X_train, X_test, Y_train, Y_test = data.split_dataset(file_path, X, Y, test_size , encoding)
 
-        parameters, costs = mlp.L_layer_model(X_train, Y_train, layers_dims, optimizer = optimizer, learning_rate = learning_rate, num_iterations =num_iterations,name_file = file_path,  print_cost = True,keep_prob = 1,  lambd=0.8 , decay =decay )
+    # Choosing layers dimensions adapted to the input dimension.
+    layers_dims = [X.shape[0]]
+    if encoding == dataset.one_hot_encoding:
+        if drug_class == 'PI' :
+            layers_dims.append(int(layers_dims[0] / 10))
+            layers_dims.append(int(layers_dims[0] / 20))
+            layers_dims.append(int(layers_dims[0] / 30))
+        else:
+            layers_dims.append(int(layers_dims[0] / 50))
+            layers_dims.append(int(layers_dims[0] / 60))
+            layers_dims.append(int(layers_dims[0] / 70))
+    else:  # integer_encoding
+        layers_dims.append(int(layers_dims[0] / 2))
+        layers_dims.append(int(layers_dims[0] / 4))
+        layers_dims.append(int(layers_dims[0] / 8))
 
-        predictions_train = mlp.predict(parameters, X_train)
+    layers_dims.append(1)
 
-        train_accuracy = data.accuracy(predictions_train, Y_train, file_path, 0)[0]
+    # Training The model :
+    parameters = mlp.train_model(X_train, Y_train, layers_dims, optimizer = optimizer, learning_rate = learning_rate,encoding = encoding, num_iterations =num_iterations,name_file = file_path,  print_cost = True, printing_step = printing_step,keep_prob = 1,  lambd=1 , decay =decay )
 
-        print(">>>>>>>>>Accuracy on train set: {:.2f}%".format(train_accuracy))
+    # Evaluating the model :
 
-        predictions_test = mlp.predict(parameters, X_test)
-
-        test_accuracy = data.accuracy(predictions_test, Y_test,file_path, 1)[0]
-
-        print(">>>>>>>>>Accuracy on test set: {:.2f}%".format(test_accuracy))
-
-        layers_dims.pop(0)
+    mlp.evaluate(file_path, X_test, Y_test, parameters)
 
 
 
-apply_mlp_on_hiv_dataset(8, protease_consensus, 'PI_DataSet.txt')
-apply_mlp_on_hiv_dataset(4, protease_consensus, 'NNRTI_DataSet.txt')
-apply_mlp_on_hiv_dataset(5, protease_consensus, 'INI_DataSet.txt')
-apply_mlp_on_hiv_dataset(6, protease_consensus, 'NRTI_DataSet.txt')
+#Calling the function apply_mlp_on_hiv_dataset for PI drugs
+for i in range(8):
+    apply_mlp_on_hiv_dataset('PI_DataSet.txt',i, learning_rate,  optimizer, 10000, data.integer_encoding, printing_step= 500)
+    apply_mlp_on_hiv_dataset('PI_DataSet.txt',i, learning_rate,  optimizer, 50, data.one_hot_encoding, printing_step= 10)
 
+
+#Calling the function apply_mlp_on_hiv_dataset for INI drugs
+for i in range(4):
+    apply_mlp_on_hiv_dataset('INI_DataSet.txt',i, learning_rate,  optimizer, 10000, data.integer_encoding, printing_step= 500)
+    apply_mlp_on_hiv_dataset('INI_DataSet.txt',i, learning_rate,  optimizer, 100, data.one_hot_encoding, printing_step= 10)
+
+
+#Calling the function apply_mlp_on_hiv_dataset for NRTI drugs
+for i in range(6):
+    apply_mlp_on_hiv_dataset('NRTI_DataSet.txt',i, learning_rate,  optimizer, 10000, data.integer_encoding, printing_step= 500)
+    apply_mlp_on_hiv_dataset('NRTI_DataSet.txt',i, learning_rate,  optimizer, 100, data.one_hot_encoding, printing_step= 10)
+    
+
+#Calling the function apply_mlp_on_hiv_dataset for NNRTI drugs
+for i in range(4):
+    apply_mlp_on_hiv_dataset('NNRTI_DataSet.txt',i, learning_rate,  optimizer, 10000, data.integer_encoding, printing_step= 500)
+    apply_mlp_on_hiv_dataset('NNRTI_DataSet.txt',i, learning_rate,  optimizer, 100, data.one_hot_encoding, printing_step= 10)
 
 

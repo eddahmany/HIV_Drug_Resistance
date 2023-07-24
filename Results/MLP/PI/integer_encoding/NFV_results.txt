@@ -1,0 +1,41 @@
+Data  :
+	Encoding type : integer_encoding
+	Test Set : 10.00% (size) : (99, 234)
+	Train Set : 90.00% (size) : (99, 2109)
+
+Parameters :
+	Layer dimensions : [99, 49, 24, 12, 1]
+	Optimizer : adam
+	Learning rate : 0.01
+	Number of Epochs : 10000
+	Decay Function : schedule_lr_decay
+	L2 regularization parameter : 1
+
+Training :
+	Epoch 0:			loss : 7.8260 	-	 accuracy : 57.52%
+	Epoch 500:			loss : 0.3755 	-	 accuracy : 85.16%
+	Epoch 1000:			loss : 0.2960 	-	 accuracy : 88.34%
+	Epoch 1500:			loss : 0.2569 	-	 accuracy : 89.85%
+	Epoch 2000:			loss : 0.2338 	-	 accuracy : 91.09%
+	Epoch 2500:			loss : 0.2071 	-	 accuracy : 91.80%
+	Epoch 3000:			loss : 0.1905 	-	 accuracy : 92.94%
+	Epoch 3500:			loss : 0.1827 	-	 accuracy : 93.31%
+	Epoch 4000:			loss : 0.1696 	-	 accuracy : 94.17%
+	Epoch 4500:			loss : 0.1596 	-	 accuracy : 94.17%
+	Epoch 5000:			loss : 0.1497 	-	 accuracy : 94.74%
+	Epoch 5500:			loss : 0.1453 	-	 accuracy : 95.07%
+	Epoch 6000:			loss : 0.1342 	-	 accuracy : 95.21%
+	Epoch 6500:			loss : 0.1272 	-	 accuracy : 95.50%
+	Epoch 7000:			loss : 0.1220 	-	 accuracy : 95.92%
+	Epoch 7500:			loss : 0.1166 	-	 accuracy : 96.06%
+	Epoch 8000:			loss : 0.1121 	-	 accuracy : 96.21%
+	Epoch 8500:			loss : 0.1065 	-	 accuracy : 96.44%
+	Epoch 9000:			loss : 0.1030 	-	 accuracy : 96.49%
+	Epoch 9500:			loss : 0.0985 	-	 accuracy : 96.54%
+	Epoch 9999:			loss : 0.0967 	-	 accuracy : 96.78%
+	Training time : 1 min 37.00 s
+
+Evaluating :
+	TP TN FP FN :
+	110 88 20 16
+	Accuracy : 84.62%

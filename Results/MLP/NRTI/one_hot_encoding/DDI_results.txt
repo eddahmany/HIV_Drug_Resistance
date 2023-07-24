@@ -1,0 +1,31 @@
+Data  :
+	Encoding type : one_hot_encoding
+	Test Set : 10.00% (size) : (7200, 215)
+	Train Set : 90.00% (size) : (7200, 1937)
+
+Parameters :
+	Layer dimensions : [7200, 144, 120, 102, 1]
+	Optimizer : adam
+	Learning rate : 0.01
+	Number of Epochs : 100
+	Decay Function : schedule_lr_decay
+	L2 regularization parameter : 1
+
+Training :
+	Epoch 0:			loss : 0.6700911 	-	 accuracy : 94.37274%
+	Epoch 10:			loss : 0.2724721 	-	 accuracy : 94.37274%
+	Epoch 20:			loss : 0.2238248 	-	 accuracy : 94.37274%
+	Epoch 30:			loss : 0.2045284 	-	 accuracy : 94.37274%
+	Epoch 40:			loss : 0.1965870 	-	 accuracy : 94.37274%
+	Epoch 50:			loss : 0.1872738 	-	 accuracy : 94.37274%
+	Epoch 60:			loss : 0.1726344 	-	 accuracy : 94.37274%
+	Epoch 70:			loss : 0.1467333 	-	 accuracy : 94.68250%
+	Epoch 80:			loss : 0.1107069 	-	 accuracy : 96.33454%
+	Epoch 90:			loss : 0.0760129 	-	 accuracy : 97.57357%
+	Epoch 99:			loss : 0.0538351 	-	 accuracy : 98.19308%
+	Training time : 0 min 39.19 s
+
+Evaluating :
+	TP TN FP FN :
+	7 200 0 8
+	Accuracy : 96.28%
