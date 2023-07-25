@@ -28,7 +28,6 @@ def linear_forward(A, W, b):
 
 def sigmoid(Z):
     A = 1/ ( 1 + np.exp(-Z))
-
     return A, Z
 
 def deriv_sigmoid(Z):
