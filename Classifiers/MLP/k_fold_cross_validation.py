@@ -59,7 +59,7 @@ def k_fold_cross_validation(file_name, index_drug, k = 5,batch_size = 32, num_ep
             val_accuracy = history.history['val_accuracy']
 
             for epoch in range(len(train_loss)):
-                if epoch % printing_step == 0:
+                if epoch % printing_step == 0 or epoch == (num_epochs - 1):
                     file.write(
                 "\n\t\tEpoch {}: \tloss = {:.4f}, accuracy = {:.4f}, \tval_loss = {:.4f}, val_accuracy = {:.4f}".format(
                     epoch + 1, train_loss[epoch], train_accuracy[epoch], val_loss[epoch], val_accuracy[epoch]))

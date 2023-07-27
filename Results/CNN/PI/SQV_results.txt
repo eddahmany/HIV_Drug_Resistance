@@ -1,0 +1,89 @@
+Parameters :
+	Optimizer : Adam
+	Learning rate : 0.01
+	Number of Epochs : 30
+	MiniBatch Size : 32
+	L2 regularization parameter :0.001
+
+Fold : 1
+	Training :	Training time : 0 min 11.30 s
+
+
+		Epoch 1: 	loss = 0.5202, accuracy = 0.8133, 	val_loss = 0.3200, val_accuracy = 0.9043
+		Epoch 6: 	loss = 0.2269, accuracy = 0.9374, 	val_loss = 0.2756, val_accuracy = 0.9283
+		Epoch 11: 	loss = 0.2037, accuracy = 0.9505, 	val_loss = 0.2470, val_accuracy = 0.9391
+		Epoch 16: 	loss = 0.2227, accuracy = 0.9401, 	val_loss = 0.2763, val_accuracy = 0.9000
+		Epoch 21: 	loss = 0.1777, accuracy = 0.9608, 	val_loss = 0.3235, val_accuracy = 0.9000
+		Epoch 26: 	loss = 0.1665, accuracy = 0.9684, 	val_loss = 0.3266, val_accuracy = 0.9043
+		Epoch 30: 	loss = 0.1545, accuracy = 0.9684, 	val_loss = 0.2885, val_accuracy = 0.9196
+	Evaluating :
+		Loss: 0.2885
+
+		TP TN FP FN :170 253 17 20
+		Accuracy: 0.9196
+Fold : 2
+	Training :	Training time : 0 min 11.34 s
+
+
+		Epoch 1: 	loss = 0.5542, accuracy = 0.8002, 	val_loss = 0.3108, val_accuracy = 0.8978
+		Epoch 6: 	loss = 0.2296, accuracy = 0.9358, 	val_loss = 0.3768, val_accuracy = 0.8935
+		Epoch 11: 	loss = 0.1932, accuracy = 0.9526, 	val_loss = 0.2418, val_accuracy = 0.9348
+		Epoch 16: 	loss = 0.1935, accuracy = 0.9554, 	val_loss = 0.2023, val_accuracy = 0.9630
+		Epoch 21: 	loss = 0.2002, accuracy = 0.9526, 	val_loss = 0.2089, val_accuracy = 0.9500
+		Epoch 26: 	loss = 0.1727, accuracy = 0.9635, 	val_loss = 0.2366, val_accuracy = 0.9457
+		Epoch 30: 	loss = 0.1820, accuracy = 0.9619, 	val_loss = 0.2077, val_accuracy = 0.9565
+	Evaluating :
+		Loss: 0.2077
+
+		TP TN FP FN :170 270 11 9
+		Accuracy: 0.9565
+Fold : 3
+	Training :	Training time : 0 min 11.43 s
+
+
+		Epoch 1: 	loss = 0.5953, accuracy = 0.7742, 	val_loss = 0.3628, val_accuracy = 0.8889
+		Epoch 6: 	loss = 0.2171, accuracy = 0.9369, 	val_loss = 0.2514, val_accuracy = 0.9150
+		Epoch 11: 	loss = 0.1965, accuracy = 0.9483, 	val_loss = 0.2119, val_accuracy = 0.9390
+		Epoch 16: 	loss = 0.1985, accuracy = 0.9505, 	val_loss = 0.2177, val_accuracy = 0.9368
+		Epoch 21: 	loss = 0.1784, accuracy = 0.9554, 	val_loss = 0.2182, val_accuracy = 0.9325
+		Epoch 26: 	loss = 0.1679, accuracy = 0.9581, 	val_loss = 0.2444, val_accuracy = 0.9259
+		Epoch 30: 	loss = 0.1579, accuracy = 0.9663, 	val_loss = 0.2594, val_accuracy = 0.9281
+	Evaluating :
+		Loss: 0.2594
+
+		TP TN FP FN :195 231 30 3
+		Accuracy: 0.9281
+Fold : 4
+	Training :	Training time : 0 min 11.56 s
+
+
+		Epoch 1: 	loss = 0.5666, accuracy = 0.7758, 	val_loss = 0.4536, val_accuracy = 0.8562
+		Epoch 6: 	loss = 0.2241, accuracy = 0.9429, 	val_loss = 0.2638, val_accuracy = 0.9041
+		Epoch 11: 	loss = 0.2095, accuracy = 0.9434, 	val_loss = 0.2402, val_accuracy = 0.9237
+		Epoch 16: 	loss = 0.1722, accuracy = 0.9614, 	val_loss = 0.2964, val_accuracy = 0.8889
+		Epoch 21: 	loss = 0.1710, accuracy = 0.9614, 	val_loss = 0.2468, val_accuracy = 0.9150
+		Epoch 26: 	loss = 0.1552, accuracy = 0.9690, 	val_loss = 0.2576, val_accuracy = 0.9172
+		Epoch 30: 	loss = 0.1721, accuracy = 0.9576, 	val_loss = 0.2184, val_accuracy = 0.9434
+	Evaluating :
+		Loss: 0.2184
+
+		TP TN FP FN :183 250 11 15
+		Accuracy: 0.9434
+Fold : 5
+	Training :	Training time : 0 min 11.46 s
+
+
+		Epoch 1: 	loss = 0.5627, accuracy = 0.7845, 	val_loss = 0.3117, val_accuracy = 0.9150
+		Epoch 6: 	loss = 0.2371, accuracy = 0.9282, 	val_loss = 0.2412, val_accuracy = 0.9346
+		Epoch 11: 	loss = 0.1959, accuracy = 0.9434, 	val_loss = 0.2443, val_accuracy = 0.9259
+		Epoch 16: 	loss = 0.1895, accuracy = 0.9467, 	val_loss = 0.2243, val_accuracy = 0.9368
+		Epoch 21: 	loss = 0.2041, accuracy = 0.9391, 	val_loss = 0.2517, val_accuracy = 0.9281
+		Epoch 26: 	loss = 0.1947, accuracy = 0.9505, 	val_loss = 0.3693, val_accuracy = 0.8845
+		Epoch 30: 	loss = 0.1608, accuracy = 0.9630, 	val_loss = 0.2932, val_accuracy = 0.9303
+	Evaluating :
+		Loss: 0.2932
+
+		TP TN FP FN :202 225 29 3
+		Accuracy: 0.9303
+
+Mean Validation Accuracy : 0.9356
