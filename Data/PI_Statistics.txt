@@ -1,41 +1,41 @@
 PI Statistics : 
 FPV :
-size of features :(2970, 2245)
+size of features :(99, 2245)
 size of  labels :(1, 2245)
 percentage of resistant sequences : 42.58%
 percentage of non-resistant sequences : 57.42%
 ATV :
-size of features :(2970, 1656)
+size of features :(99, 1656)
 size of  labels :(1, 1656)
 percentage of resistant sequences : 52.60%
 percentage of non-resistant sequences : 47.40%
 IDV :
-size of features :(2970, 2296)
+size of features :(99, 2296)
 size of  labels :(1, 2296)
 percentage of resistant sequences : 49.87%
 percentage of non-resistant sequences : 50.13%
 LPV :
-size of features :(2970, 1999)
+size of features :(99, 1999)
 size of  labels :(1, 1999)
 percentage of resistant sequences : 52.13%
 percentage of non-resistant sequences : 47.87%
 NFV :
-size of features :(2970, 2343)
+size of features :(99, 2343)
 size of  labels :(1, 2343)
 percentage of resistant sequences : 57.15%
 percentage of non-resistant sequences : 42.85%
 SQV :
-size of features :(2970, 2297)
+size of features :(99, 2297)
 size of  labels :(1, 2297)
 percentage of resistant sequences : 42.23%
 percentage of non-resistant sequences : 57.77%
 TPV :
-size of features :(2970, 1345)
+size of features :(99, 1345)
 size of  labels :(1, 1345)
 percentage of resistant sequences : 23.42%
 percentage of non-resistant sequences : 76.58%
 DRV :
-size of features :(2970, 1116)
+size of features :(99, 1116)
 size of  labels :(1, 1116)
 percentage of resistant sequences : 30.38%
 percentage of non-resistant sequences : 69.62%

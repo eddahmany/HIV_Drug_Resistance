@@ -1,0 +1,100 @@
+   Feature  Importance
+Feature_73    0.090580
+Feature_32    0.087540
+Feature_84    0.075483
+Feature_50    0.066429
+Feature_10    0.063408
+Feature_71    0.063390
+Feature_88    0.051314
+Feature_82    0.051278
+Feature_20    0.048329
+Feature_90    0.045254
+Feature_48    0.039266
+Feature_93    0.036245
+Feature_57    0.036245
+Feature_47    0.036236
+Feature_54    0.036217
+Feature_12    0.033224
+Feature_35    0.030193
+Feature_55    0.027181
+Feature_24    0.027172
+Feature_46    0.027172
+Feature_37    0.024169
+Feature_30    0.024160
+Feature_41    0.024142
+Feature_69    0.021148
+Feature_45    0.018127
+Feature_63    0.018118
+Feature_19    0.018109
+Feature_62    0.015106
+Feature_89    0.015106
+Feature_43    0.015106
+ Feature_4    0.015097
+Feature_60    0.015097
+Feature_58    0.015088
+Feature_33    0.015078
+Feature_13    0.015078
+Feature_67    0.012085
+Feature_77    0.012085
+Feature_74    0.012085
+Feature_61    0.012076
+Feature_64    0.012075
+Feature_76    0.012075
+Feature_91    0.009063
+Feature_34    0.009063
+ Feature_5    0.009063
+Feature_15    0.009054
+Feature_79    0.006042
+Feature_53    0.006042
+Feature_75    0.006042
+Feature_72    0.006042
+ Feature_1    0.006042
+Feature_16    0.006042
+Feature_14    0.006042
+Feature_95    0.006042
+Feature_92    0.006042
+Feature_18    0.006033
+Feature_70    0.006033
+ Feature_6    0.006033
+Feature_11    0.006033
+Feature_85    0.006033
+ Feature_7    0.003021
+Feature_83    0.003021
+Feature_22    0.003021
+Feature_23    0.003021
+Feature_65    0.003021
+Feature_39    0.003021
+ Feature_3    0.003021
+ Feature_2    0.003021
+Feature_36    0.003021
+Feature_17    0.003021
+Feature_81    0.000000
+ Feature_8    0.000000
+ Feature_9    0.000000
+Feature_87    0.000000
+Feature_86    0.000000
+Feature_94    0.000000
+Feature_96    0.000000
+Feature_97    0.000000
+Feature_98    0.000000
+Feature_51    0.000000
+Feature_21    0.000000
+Feature_80    0.000000
+Feature_31    0.000000
+Feature_49    0.000000
+Feature_44    0.000000
+Feature_56    0.000000
+Feature_42    0.000000
+Feature_40    0.000000
+Feature_59    0.000000
+Feature_38    0.000000
+Feature_29    0.000000
+Feature_78    0.000000
+Feature_66    0.000000
+Feature_28    0.000000
+Feature_68    0.000000
+Feature_27    0.000000
+Feature_26    0.000000
+Feature_25    0.000000
+Feature_52    0.000000
+Feature_99    0.000000

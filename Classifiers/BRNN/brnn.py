@@ -1,8 +1,9 @@
 import time
 
 import numpy as np
+import pandas as pd
 import tensorflow as tf
-from keras.src.layers import Conv1D, MaxPooling1D, Bidirectional, LSTM
+from keras.src.layers import Conv1D, MaxPooling1D, Bidirectional, LSTM, Dropout, SimpleRNN
 from keras.src.legacy_tf_layers.core import Flatten
 from keras.src.optimizers import RMSprop
 from sklearn.model_selection import KFold
@@ -12,7 +13,10 @@ from tensorflow.keras.optimizers import Adam
 from Data import dataset as data
 from keras.regularizers import l2
 
-def brnn(file_name, index_drug, k = 5,batch_size = 32, num_epochs = 10, printing_step=1):
+from Data.feature_importance import permutation_importance
+
+
+def brnn(file_name, index_drug, k = 5,learning_rate = 0.01, batch_size = 32, num_epochs = 10, printing_step=1):
 
     # Get the file path for writing results :
     drug_name = data.get_drug_name(file_name, index_drug)
@@ -20,22 +24,24 @@ def brnn(file_name, index_drug, k = 5,batch_size = 32, num_epochs = 10, printing
     file_path = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/BRNN/'+ drug_class +  "/" +drug_name + '_results.txt'
 
     L2_lambda = 0
-    learning_rate = 0.0001
-    momentum = 0.9
+    dropout_rate = 0.1
 
-    # Créer l'optimiseur RMSprop avec momentum
-    optimizer = RMSprop(learning_rate=learning_rate, momentum=momentum)
-    #optimizer = 'Adam'
+    optimizer = 'Adam'
 
     X, Y = data.one_hot_encoding(file_name, index_drug)
     X = np.transpose(X)
     print(">>>>>>> shape of X :"+str(X.shape))
     Y = np.transpose(Y)
+    X = X.reshape(-1, int(X.shape[1] / 30), 30)
+
     accuracies = []
+    mean_importances = np.zeros((X.shape[1]))
+
+
 
     with open(file_path , 'w') as file:
         file.write('Parameters :\n')
-        settings = "\tOptimizer : " + str(optimizer) + "\n\tLearning rate : " + str(learning_rate) + "\n\tNumber of Epochs : "+str(num_epochs) + "\n\tMiniBatch Size : "+str(batch_size) + "\n\tL2 regularization parameter :" +str(L2_lambda)+'\n\n'
+        settings = "\tOptimizer : " + str(optimizer) + "\n\tLearning rate : " + str(learning_rate) + "\n\tNumber of Epochs : "+str(num_epochs) + "\n\tMiniBatch Size : "+str(batch_size) + "\n\tRegularization parameters :"+'\n\t\tL2 lambda : '+str(L2_lambda)+'\n\t\tDropout rate :'+str(dropout_rate)+'\n\n'
         file.write(settings)
         if k > 1 :
             kf = KFold(n_splits=k, shuffle=True)
@@ -56,25 +62,26 @@ def brnn(file_name, index_drug, k = 5,batch_size = 32, num_epochs = 10, printing
             Y_train, Y_test = Y[ train_index], Y[test_index]
             print("X train shape : "+str(X_train.shape))
             print("X test shape : "+str(X_test.shape))
-            X_train = X_train.reshape(-1, int(X_train.shape[1]/30), 30)
-            X_test = X_test.reshape(-1, int(X_test.shape[1]/30), 30)
-
 
             X_train = X_train.astype(np.float32)
             X_test = X_test.astype(np.float32)
 
             model = Sequential()
 
-            model.add(Bidirectional(LSTM(30, activation='relu', kernel_regularizer=l2(L2_lambda),input_shape=(X_train.shape[1], X_train.shape[2]))))
+            model.add(Bidirectional(
+                LSTM(2, activation='relu', kernel_regularizer=l2(L2_lambda), input_shape=(X.shape[1], X.shape[2]))))
+            model.add(Dropout(rate=dropout_rate))
             model.add(Dense(1, activation='sigmoid', kernel_regularizer=l2(L2_lambda)))
-            model.compile(optimizer=optimizer,
+            model.compile(optimizer=Adam(learning_rate=learning_rate),
                           loss='binary_crossentropy',
                           metrics=['accuracy'])
 
             history = tf.keras.callbacks.History()
 
+
             file.write("\n\tTraining :")
             start_time = time.time()
+
 
             model.fit(X_train, Y_train, epochs=num_epochs, batch_size=batch_size, validation_data=(X_test, Y_test), verbose=1,
                       callbacks=[history])
@@ -105,13 +112,15 @@ def brnn(file_name, index_drug, k = 5,batch_size = 32, num_epochs = 10, printing
 
             file.write("\n\t\tLoss: {:.4f}\n".format(loss))
 
-
             accuracies.append(accuracy)
+
+            importances = permutation_importance(model, X_test, Y_test, iterations=1)
+
+            mean_importances += importances
 
             predictions = model.predict(X_test)
 
             binary_predictions = np.round(predictions)
-
 
             tp = np.sum(np.logical_and(binary_predictions == 1, Y_test == 1))
             tn = np.sum(np.logical_and(binary_predictions == 0, Y_test == 0))
@@ -126,21 +135,32 @@ def brnn(file_name, index_drug, k = 5,batch_size = 32, num_epochs = 10, printing
         mean_accuracies = np.mean(accuracies)
         file.write("\nMean Validation Accuracy : {:.4f}\n".format(mean_accuracies))
 
+        importance_df = pd.DataFrame()
+
+        importance_df['Feature'] = [f'Feature_{col}' for col in range(1, (X.shape[1] + 1))]
+        importance_df['Importance'] = mean_importances
+        importance_df = importance_df.sort_values('Importance', ascending=False)
+
+        pd.set_option("display.max_rows", None)
+        pd.set_option("display.max_columns", None)
+        feature_importance_file_path = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Feature_importance/BRNN/' + drug_class + "/" + drug_name + '_results.txt'
+
+        with open(feature_importance_file_path, 'w') as file:
+            file.write(importance_df.to_string(index=False))
+
 
 
 for i in range(8):
-    brnn('PI_DataSet.txt', i, k = 5, num_epochs= 30, printing_step= 2)
+    brnn('PI_DataSet.txt', i, k = 5,learning_rate = 0.01, num_epochs= 30, printing_step= 2)
 
-"""
+
+for i in range(4):
+    brnn('INI_DataSet.txt', i, k = 5,learning_rate = 0.125, num_epochs= 30, printing_step= 2)
+
+
 for i in range(6):
-    brnn('NRTI_DataSet.txt', i, k = 5, num_epochs= 30, printing_step= 2)
+    brnn('NRTI_DataSet.txt', i, k = 5,learning_rate = 0.1, num_epochs= 30, printing_step= 2)
 
 
 for i in range(4):
-    brnn('NNRTI_DataSet.txt', i, k = 5, num_epochs= 30, printing_step= 2)
-
-
-for i in range(4):
-    brnn('INI_DataSet.txt', i, k = 5, num_epochs= 30, printing_step= 2)
-
-"""
+    brnn('NNRTI_DataSet.txt', i, k = 5,learning_rate = 0.1, num_epochs= 30, printing_step= 2)

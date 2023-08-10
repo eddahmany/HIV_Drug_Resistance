@@ -1,21 +1,21 @@
 NNRTI Statistics : 
 EFV :
-size of features :(7200, 2211)
+size of features :(240, 2211)
 size of  labels :(1, 2211)
 percentage of resistant sequences : 44.69%
 percentage of non-resistant sequences : 55.31%
 NVP :
-size of features :(7200, 2209)
+size of features :(240, 2209)
 size of  labels :(1, 2209)
 percentage of resistant sequences : 52.65%
 percentage of non-resistant sequences : 47.35%
 ETR :
-size of features :(7200, 984)
+size of features :(240, 984)
 size of  labels :(1, 984)
 percentage of resistant sequences : 23.78%
 percentage of non-resistant sequences : 76.22%
 RPV :
-size of features :(7200, 188)
+size of features :(240, 188)
 size of  labels :(1, 188)
 percentage of resistant sequences : 32.45%
 percentage of non-resistant sequences : 67.55%

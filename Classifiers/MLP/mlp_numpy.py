@@ -3,7 +3,7 @@
 from Data import dataset as data, dataset
 
 import matplotlib.pyplot as plt
-import mlp_functions as mlp
+import mlp_functions_numpy as mlp
 import numpy as np
 import time
 

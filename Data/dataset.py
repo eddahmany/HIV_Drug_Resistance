@@ -17,8 +17,8 @@ def one_hot_encoding(file, index_labels):
     else:
         consensus = RT_consensus
 
-    start_char = ord('A')  # Code ASCII de la première lettre ('A')
-    end_char = ord('Z')  # Code ASCII de la dernière lettre ('Z')
+    start_char = ord('A')
+    end_char = ord('Z')
     letter_to_int = {chr(letter_code): idx for idx, letter_code in enumerate(range(start_char, end_char + 1))}
     letter_to_int['.'] = len(letter_to_int)
     letter_to_int['*'] = len(letter_to_int)
@@ -145,6 +145,37 @@ def integer_encoding(file, index_labels):
     return features, labels
 
 
+def integer_to_one_hot(X) :
+    X = X.T
+    X_one_hot = []
+    start_char = ord('A')
+    end_char = ord('Z')
+    letter_to_int = {chr(letter_code): idx for idx, letter_code in enumerate(range(start_char, end_char + 1))}
+    letter_to_int['.'] = len(letter_to_int)
+    letter_to_int['*'] = len(letter_to_int)
+    letter_to_int['~'] = len(letter_to_int)
+    letter_to_int['#'] = len(letter_to_int)
+
+
+    n = len(letter_to_int)
+
+    m = len(X)
+    for i in range(m):
+        one_hot_sequence = []
+        for position in X[i]:
+            one_hot_vector = [0] * n
+            if value == '-':
+                one_hot_vector[letter_to_int[consensus[i]]] = 1
+            else:
+                for c in value:
+                    one_hot_vector[letter_to_int[c]] = 1
+            encoded_sequence.append(one_hot_vector)
+        encoded_sequence = np.array(encoded_sequence).flatten()
+
+        features.append(encoded_sequence)
+
+
+
 def compute_label_percentage(labels):
     m = labels.shape[1]
     count_1 = np.sum(labels == 1)
@@ -233,7 +264,7 @@ def statistics(filename , drug_number):
     with open(path_file, 'w') as file:
         file.write(drug_class + ' Statistics : \n')
     for i in range(drug_number):
-        features, labels = one_hot_encoding(filename, i)
+        features, labels = integer_encoding(filename, i)
         drug_name =  get_drug_name(filename, i)
         with open(path_file , 'a') as file:
             file.write(drug_name+' :\n')

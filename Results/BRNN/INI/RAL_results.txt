@@ -1,0 +1,36 @@
+Parameters :
+	Optimizer : Adam
+	Learning rate : 0.125
+	Number of Epochs : 30
+	MiniBatch Size : 32
+	Regularization parameters :
+		L2 lambda : 0
+		Dropout rate :0.1
+
+Fold : 1
+	Training :	Training time : 0 min 48.45 s
+
+
+		Epoch 1: 	loss = 0.6698, accuracy = 0.6153, 	val_loss = 0.6540, val_accuracy = 0.6486
+		Epoch 3: 	loss = 0.6612, accuracy = 0.6272, 	val_loss = 0.6534, val_accuracy = 0.6486
+		Epoch 5: 	loss = 0.6621, accuracy = 0.6272, 	val_loss = 0.6502, val_accuracy = 0.6486
+		Epoch 7: 	loss = 0.6620, accuracy = 0.6272, 	val_loss = 0.6518, val_accuracy = 0.6486
+		Epoch 9: 	loss = 0.6684, accuracy = 0.6272, 	val_loss = 0.6495, val_accuracy = 0.6486
+		Epoch 11: 	loss = 0.6634, accuracy = 0.6272, 	val_loss = 0.6483, val_accuracy = 0.6486
+		Epoch 13: 	loss = 0.6625, accuracy = 0.6272, 	val_loss = 0.6487, val_accuracy = 0.6486
+		Epoch 15: 	loss = 0.6659, accuracy = 0.6272, 	val_loss = 0.6490, val_accuracy = 0.6486
+		Epoch 17: 	loss = 0.6612, accuracy = 0.6272, 	val_loss = 0.6488, val_accuracy = 0.6486
+		Epoch 19: 	loss = 0.6608, accuracy = 0.6272, 	val_loss = 0.6484, val_accuracy = 0.6486
+		Epoch 21: 	loss = 0.6634, accuracy = 0.6272, 	val_loss = 0.6489, val_accuracy = 0.6486
+		Epoch 23: 	loss = 0.6629, accuracy = 0.6272, 	val_loss = 0.6491, val_accuracy = 0.6486
+		Epoch 25: 	loss = 0.6641, accuracy = 0.6272, 	val_loss = 0.6493, val_accuracy = 0.6486
+		Epoch 27: 	loss = 0.6633, accuracy = 0.6272, 	val_loss = 0.6501, val_accuracy = 0.6486
+		Epoch 29: 	loss = 0.6618, accuracy = 0.6272, 	val_loss = 0.6490, val_accuracy = 0.6486
+		Epoch 30: 	loss = 0.6612, accuracy = 0.6272, 	val_loss = 0.6499, val_accuracy = 0.6486
+	Evaluating :
+		Loss: 0.6499
+
+		TP TN FP FN :0 48 0 26
+		Accuracy: 0.6486
+
+Mean Validation Accuracy : 0.6486
