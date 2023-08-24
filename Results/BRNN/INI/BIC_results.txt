@@ -1,0 +1,35 @@
+Parameters :
+	Optimizer : Adam
+	Learning rate : 0.0005
+	Number of Epochs : 20
+	MiniBatch Size : 32
+	Regularization parameters :
+		L2 lambda : 0.005
+		Dropout rate :0
+
+Fold : 1
+	Training :	Training time : 0 min 2.95 s
+
+
+		Epoch 1: 	loss = 2.2545, accuracy = 0.2108, train_f1_score = 0.1350  	val_loss = 3.0953, val_accuracy = 0.8000, val_f1_score = 0.0000
+		Epoch 3: 	loss = 2.0721, accuracy = 0.9405, train_f1_score = 0.0000  	val_loss = 3.1051, val_accuracy = 0.8500, val_f1_score = 0.0000
+		Epoch 5: 	loss = 1.9292, accuracy = 0.9459, train_f1_score = 0.6222  	val_loss = 2.9857, val_accuracy = 0.9000, val_f1_score = 0.5000
+		Epoch 7: 	loss = 1.7978, accuracy = 0.9351, train_f1_score = 0.4333  	val_loss = 2.8438, val_accuracy = 0.9000, val_f1_score = 0.5000
+		Epoch 9: 	loss = 1.6710, accuracy = 0.8757, train_f1_score = 0.3778  	val_loss = 2.9524, val_accuracy = 0.9000, val_f1_score = 0.5000
+		Epoch 11: 	loss = 1.5678, accuracy = 0.7676, train_f1_score = 0.3704  	val_loss = 2.7537, val_accuracy = 0.9000, val_f1_score = 0.5000
+		Epoch 13: 	loss = 1.3215, accuracy = 0.9405, train_f1_score = 0.5944  	val_loss = 2.7995, val_accuracy = 0.9000, val_f1_score = 0.5000
+		Epoch 15: 	loss = 1.0138, accuracy = 0.9405, train_f1_score = 0.6056  	val_loss = 2.6453, val_accuracy = 0.9500, val_f1_score = 0.8000
+		Epoch 17: 	loss = 0.7138, accuracy = 0.9676, train_f1_score = 0.7873  	val_loss = 3.1274, val_accuracy = 0.9500, val_f1_score = 0.8000
+		Epoch 19: 	loss = 0.6835, accuracy = 0.9514, train_f1_score = 0.5944  	val_loss = 3.3186, val_accuracy = 0.9500, val_f1_score = 0.8000
+		Epoch 20: 	loss = 0.5705, accuracy = 0.9892, train_f1_score = 0.7778  	val_loss = 3.3332, val_accuracy = 0.9000, val_f1_score = 0.6667
+	Evaluating :
+		Loss: 3.3332
+
+		TP TN FP FN :2 16 1 1
+		Accuracy: 0.9000
+
+		F1 Score: 0.6667
+
+Mean Validation Accuracy : 0.9000
+
+Mean Validation F1 Score : 0.6667

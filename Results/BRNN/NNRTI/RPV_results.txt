@@ -1,0 +1,148 @@
+Parameters :
+	Optimizer : Adam
+	Learning rate : 0.001
+	Number of Epochs : 30
+	MiniBatch Size : 32
+	Regularization parameters :
+		L2 lambda : 0.01
+		Dropout rate :0
+
+Fold : 1
+	Training :	Training time : 0 min 3.62 s
+
+
+		Epoch 1: 	loss = 2.9009, accuracy = 0.4667, train_f1_score = 0.3455  	val_loss = 2.7569, val_accuracy = 0.6053, val_f1_score = 0.6263
+		Epoch 3: 	loss = 2.5146, accuracy = 0.6200, train_f1_score = 0.5475  	val_loss = 2.4078, val_accuracy = 0.5263, val_f1_score = 0.5923
+		Epoch 5: 	loss = 2.1950, accuracy = 0.8000, train_f1_score = 0.5493  	val_loss = 2.1106, val_accuracy = 0.7105, val_f1_score = 0.6786
+		Epoch 7: 	loss = 1.9449, accuracy = 0.7067, train_f1_score = 0.5799  	val_loss = 1.8606, val_accuracy = 0.7895, val_f1_score = 0.6952
+		Epoch 9: 	loss = 1.6864, accuracy = 0.7467, train_f1_score = 0.6046  	val_loss = 1.6555, val_accuracy = 0.7632, val_f1_score = 0.6786
+		Epoch 11: 	loss = 1.4554, accuracy = 0.8267, train_f1_score = 0.7178  	val_loss = 1.4782, val_accuracy = 0.7895, val_f1_score = 0.7227
+		Epoch 13: 	loss = 1.3009, accuracy = 0.8267, train_f1_score = 0.6552  	val_loss = 1.3715, val_accuracy = 0.7895, val_f1_score = 0.7227
+		Epoch 15: 	loss = 1.0641, accuracy = 0.8533, train_f1_score = 0.7698  	val_loss = 1.2974, val_accuracy = 0.7105, val_f1_score = 0.6786
+		Epoch 17: 	loss = 0.8642, accuracy = 0.9200, train_f1_score = 0.8796  	val_loss = 1.2751, val_accuracy = 0.5526, val_f1_score = 0.5972
+		Epoch 19: 	loss = 0.7278, accuracy = 0.9400, train_f1_score = 0.9088  	val_loss = 1.2127, val_accuracy = 0.6579, val_f1_score = 0.6978
+		Epoch 21: 	loss = 0.6701, accuracy = 0.9267, train_f1_score = 0.8932  	val_loss = 1.4312, val_accuracy = 0.7105, val_f1_score = 0.3667
+		Epoch 23: 	loss = 0.6283, accuracy = 0.9533, train_f1_score = 0.9118  	val_loss = 1.0348, val_accuracy = 0.8684, val_f1_score = 0.8175
+		Epoch 25: 	loss = 0.4923, accuracy = 0.9800, train_f1_score = 0.9660  	val_loss = 1.0648, val_accuracy = 0.8421, val_f1_score = 0.7970
+		Epoch 27: 	loss = 0.4176, accuracy = 0.9867, train_f1_score = 0.9759  	val_loss = 1.3853, val_accuracy = 0.6842, val_f1_score = 0.2909
+		Epoch 29: 	loss = 0.3973, accuracy = 0.9867, train_f1_score = 0.9787  	val_loss = 0.9748, val_accuracy = 0.8684, val_f1_score = 0.8175
+		Epoch 30: 	loss = 0.3915, accuracy = 0.9733, train_f1_score = 0.9618  	val_loss = 1.0947, val_accuracy = 0.8158, val_f1_score = 0.6863
+	Evaluating :
+		Loss: 1.0947
+
+		TP TN FP FN :8 23 3 4
+		Accuracy: 0.8158
+
+		F1 Score: 0.6863
+Fold : 2
+	Training :	Training time : 0 min 3.27 s
+
+
+		Epoch 1: 	loss = 2.9014, accuracy = 0.5600, train_f1_score = 0.3193  	val_loss = 2.7841, val_accuracy = 0.2632, val_f1_score = 0.2381
+		Epoch 3: 	loss = 2.5185, accuracy = 0.7067, train_f1_score = 0.2555  	val_loss = 2.4395, val_accuracy = 0.7105, val_f1_score = 0.1333
+		Epoch 5: 	loss = 2.1980, accuracy = 0.5200, train_f1_score = 0.5353  	val_loss = 2.1572, val_accuracy = 0.4211, val_f1_score = 0.2333
+		Epoch 7: 	loss = 1.9346, accuracy = 0.7867, train_f1_score = 0.6179  	val_loss = 1.9136, val_accuracy = 0.6842, val_f1_score = 0.2500
+		Epoch 9: 	loss = 1.6923, accuracy = 0.7600, train_f1_score = 0.6765  	val_loss = 1.7153, val_accuracy = 0.7105, val_f1_score = 0.2105
+		Epoch 11: 	loss = 1.4938, accuracy = 0.7267, train_f1_score = 0.6660  	val_loss = 1.5335, val_accuracy = 0.7105, val_f1_score = 0.2857
+		Epoch 13: 	loss = 1.2940, accuracy = 0.8467, train_f1_score = 0.7662  	val_loss = 1.3917, val_accuracy = 0.7368, val_f1_score = 0.3182
+		Epoch 15: 	loss = 1.1408, accuracy = 0.8467, train_f1_score = 0.7233  	val_loss = 1.3095, val_accuracy = 0.6579, val_f1_score = 0.3077
+		Epoch 17: 	loss = 1.0019, accuracy = 0.8733, train_f1_score = 0.8125  	val_loss = 1.2583, val_accuracy = 0.6579, val_f1_score = 0.3077
+		Epoch 19: 	loss = 0.8971, accuracy = 0.8800, train_f1_score = 0.8111  	val_loss = 1.1509, val_accuracy = 0.6579, val_f1_score = 0.3077
+		Epoch 21: 	loss = 0.7638, accuracy = 0.8933, train_f1_score = 0.8382  	val_loss = 1.0288, val_accuracy = 0.7632, val_f1_score = 0.3333
+		Epoch 23: 	loss = 0.5925, accuracy = 0.9467, train_f1_score = 0.9260  	val_loss = 1.1994, val_accuracy = 0.8421, val_f1_score = 0.3500
+		Epoch 25: 	loss = 0.5157, accuracy = 0.9467, train_f1_score = 0.9139  	val_loss = 1.1488, val_accuracy = 0.8158, val_f1_score = 0.3636
+		Epoch 27: 	loss = 0.4187, accuracy = 0.9667, train_f1_score = 0.9469  	val_loss = 1.2709, val_accuracy = 0.8684, val_f1_score = 0.3810
+		Epoch 29: 	loss = 0.4013, accuracy = 0.9533, train_f1_score = 0.9329  	val_loss = 1.6261, val_accuracy = 0.7895, val_f1_score = 0.2778
+		Epoch 30: 	loss = 0.3917, accuracy = 0.9800, train_f1_score = 0.9482  	val_loss = 1.5084, val_accuracy = 0.8421, val_f1_score = 0.3500
+	Evaluating :
+		Loss: 1.5084
+
+		TP TN FP FN :7 25 1 5
+		Accuracy: 0.8421
+
+		F1 Score: 0.3500
+Fold : 3
+	Training :	Training time : 0 min 3.28 s
+
+
+		Epoch 1: 	loss = 2.9084, accuracy = 0.4400, train_f1_score = 0.3649  	val_loss = 2.7956, val_accuracy = 0.6842, val_f1_score = 0.1000
+		Epoch 3: 	loss = 2.5231, accuracy = 0.7267, train_f1_score = 0.4178  	val_loss = 2.4552, val_accuracy = 0.6842, val_f1_score = 0.3538
+		Epoch 5: 	loss = 2.2150, accuracy = 0.6867, train_f1_score = 0.5889  	val_loss = 2.1656, val_accuracy = 0.6579, val_f1_score = 0.5714
+		Epoch 7: 	loss = 1.9518, accuracy = 0.7467, train_f1_score = 0.4990  	val_loss = 1.9367, val_accuracy = 0.6579, val_f1_score = 0.3875
+		Epoch 9: 	loss = 1.7327, accuracy = 0.7533, train_f1_score = 0.6921  	val_loss = 1.7485, val_accuracy = 0.6842, val_f1_score = 0.4000
+		Epoch 11: 	loss = 1.5386, accuracy = 0.8000, train_f1_score = 0.6951  	val_loss = 1.5813, val_accuracy = 0.7368, val_f1_score = 0.4941
+		Epoch 13: 	loss = 1.3577, accuracy = 0.8067, train_f1_score = 0.7094  	val_loss = 1.4614, val_accuracy = 0.7368, val_f1_score = 0.4941
+		Epoch 15: 	loss = 1.1875, accuracy = 0.8333, train_f1_score = 0.7246  	val_loss = 1.3101, val_accuracy = 0.6316, val_f1_score = 0.5657
+		Epoch 17: 	loss = 1.0125, accuracy = 0.8933, train_f1_score = 0.8409  	val_loss = 1.2166, val_accuracy = 0.6316, val_f1_score = 0.5657
+		Epoch 19: 	loss = 0.8779, accuracy = 0.8733, train_f1_score = 0.7797  	val_loss = 1.2140, val_accuracy = 0.7895, val_f1_score = 0.5684
+		Epoch 21: 	loss = 0.8268, accuracy = 0.8533, train_f1_score = 0.7496  	val_loss = 1.1909, val_accuracy = 0.6579, val_f1_score = 0.6853
+		Epoch 23: 	loss = 0.6540, accuracy = 0.9267, train_f1_score = 0.8791  	val_loss = 1.0825, val_accuracy = 0.7368, val_f1_score = 0.5333
+		Epoch 25: 	loss = 0.5689, accuracy = 0.9467, train_f1_score = 0.9126  	val_loss = 1.2641, val_accuracy = 0.7632, val_f1_score = 0.4857
+		Epoch 27: 	loss = 0.5075, accuracy = 0.9667, train_f1_score = 0.9511  	val_loss = 1.0826, val_accuracy = 0.6842, val_f1_score = 0.7389
+		Epoch 29: 	loss = 0.4551, accuracy = 0.9733, train_f1_score = 0.9600  	val_loss = 1.0301, val_accuracy = 0.7368, val_f1_score = 0.5478
+		Epoch 30: 	loss = 0.3983, accuracy = 0.9800, train_f1_score = 0.9752  	val_loss = 1.0113, val_accuracy = 0.7105, val_f1_score = 0.5182
+	Evaluating :
+		Loss: 1.0113
+
+		TP TN FP FN :8 19 6 5
+		Accuracy: 0.7105
+
+		F1 Score: 0.5182
+Fold : 4
+	Training :	Training time : 0 min 3.52 s
+
+
+		Epoch 1: 	loss = 2.9161, accuracy = 0.3709, train_f1_score = 0.4360  	val_loss = 2.7919, val_accuracy = 0.6757, val_f1_score = 0.0769
+		Epoch 3: 	loss = 2.5298, accuracy = 0.7815, train_f1_score = 0.5991  	val_loss = 2.4486, val_accuracy = 0.7027, val_f1_score = 0.2222
+		Epoch 5: 	loss = 2.2068, accuracy = 0.8013, train_f1_score = 0.6991  	val_loss = 2.1611, val_accuracy = 0.5946, val_f1_score = 0.2083
+		Epoch 7: 	loss = 1.9290, accuracy = 0.8278, train_f1_score = 0.6996  	val_loss = 1.9240, val_accuracy = 0.5946, val_f1_score = 0.1818
+		Epoch 9: 	loss = 1.6964, accuracy = 0.7881, train_f1_score = 0.7151  	val_loss = 1.7283, val_accuracy = 0.6486, val_f1_score = 0.2692
+		Epoch 11: 	loss = 1.4673, accuracy = 0.8344, train_f1_score = 0.7603  	val_loss = 1.5661, val_accuracy = 0.6757, val_f1_score = 0.2963
+		Epoch 13: 	loss = 1.2915, accuracy = 0.7748, train_f1_score = 0.7005  	val_loss = 1.4724, val_accuracy = 0.6757, val_f1_score = 0.2963
+		Epoch 15: 	loss = 1.1247, accuracy = 0.8675, train_f1_score = 0.7962  	val_loss = 1.3749, val_accuracy = 0.6757, val_f1_score = 0.2963
+		Epoch 17: 	loss = 0.9478, accuracy = 0.9073, train_f1_score = 0.8497  	val_loss = 1.3590, val_accuracy = 0.6486, val_f1_score = 0.3226
+		Epoch 19: 	loss = 0.8369, accuracy = 0.8874, train_f1_score = 0.8399  	val_loss = 1.2504, val_accuracy = 0.6757, val_f1_score = 0.2963
+		Epoch 21: 	loss = 0.6702, accuracy = 0.9404, train_f1_score = 0.9112  	val_loss = 1.2155, val_accuracy = 0.6216, val_f1_score = 0.3000
+		Epoch 23: 	loss = 0.5333, accuracy = 0.9801, train_f1_score = 0.9684  	val_loss = 1.1161, val_accuracy = 0.6486, val_f1_score = 0.3226
+		Epoch 25: 	loss = 0.4465, accuracy = 0.9801, train_f1_score = 0.9632  	val_loss = 1.1299, val_accuracy = 0.6486, val_f1_score = 0.3226
+		Epoch 27: 	loss = 0.3968, accuracy = 0.9801, train_f1_score = 0.9738  	val_loss = 0.9884, val_accuracy = 0.7297, val_f1_score = 0.3000
+		Epoch 29: 	loss = 0.3739, accuracy = 1.0000, train_f1_score = 1.0000  	val_loss = 1.1097, val_accuracy = 0.7027, val_f1_score = 0.3437
+		Epoch 30: 	loss = 0.3507, accuracy = 1.0000, train_f1_score = 1.0000  	val_loss = 1.3856, val_accuracy = 0.6757, val_f1_score = 0.3529
+	Evaluating :
+		Loss: 1.3856
+
+		TP TN FP FN :12 13 12 0
+		Accuracy: 0.6757
+
+		F1 Score: 0.3529
+Fold : 5
+	Training :	Training time : 0 min 3.27 s
+
+
+		Epoch 1: 	loss = 2.9091, accuracy = 0.3974, train_f1_score = 0.4364  	val_loss = 2.7762, val_accuracy = 0.7297, val_f1_score = 0.1538
+		Epoch 3: 	loss = 2.5210, accuracy = 0.7285, train_f1_score = 0.5368  	val_loss = 2.4267, val_accuracy = 0.6486, val_f1_score = 0.5833
+		Epoch 5: 	loss = 2.1991, accuracy = 0.6954, train_f1_score = 0.6211  	val_loss = 2.1264, val_accuracy = 0.6757, val_f1_score = 0.5942
+		Epoch 7: 	loss = 1.9332, accuracy = 0.7219, train_f1_score = 0.6390  	val_loss = 1.8759, val_accuracy = 0.7297, val_f1_score = 0.6377
+		Epoch 9: 	loss = 1.6915, accuracy = 0.8212, train_f1_score = 0.6804  	val_loss = 1.6651, val_accuracy = 0.7027, val_f1_score = 0.5833
+		Epoch 11: 	loss = 1.5001, accuracy = 0.8013, train_f1_score = 0.6752  	val_loss = 1.4561, val_accuracy = 0.9189, val_f1_score = 0.9286
+		Epoch 13: 	loss = 1.3333, accuracy = 0.8079, train_f1_score = 0.6932  	val_loss = 1.2600, val_accuracy = 0.9189, val_f1_score = 0.9348
+		Epoch 15: 	loss = 1.1515, accuracy = 0.8344, train_f1_score = 0.7322  	val_loss = 1.1022, val_accuracy = 0.9189, val_f1_score = 0.9286
+		Epoch 17: 	loss = 0.9874, accuracy = 0.8477, train_f1_score = 0.7876  	val_loss = 1.1790, val_accuracy = 0.8108, val_f1_score = 0.7667
+		Epoch 19: 	loss = 0.8863, accuracy = 0.9139, train_f1_score = 0.8523  	val_loss = 0.9044, val_accuracy = 0.9189, val_f1_score = 0.9286
+		Epoch 21: 	loss = 0.8325, accuracy = 0.8940, train_f1_score = 0.8267  	val_loss = 1.0055, val_accuracy = 0.5946, val_f1_score = 0.5125
+		Epoch 23: 	loss = 0.7739, accuracy = 0.8609, train_f1_score = 0.7859  	val_loss = 0.7364, val_accuracy = 0.9459, val_f1_score = 0.9500
+		Epoch 25: 	loss = 0.5785, accuracy = 0.9338, train_f1_score = 0.8869  	val_loss = 0.6897, val_accuracy = 0.9459, val_f1_score = 0.9500
+		Epoch 27: 	loss = 0.4751, accuracy = 0.9536, train_f1_score = 0.9376  	val_loss = 0.6320, val_accuracy = 0.9730, val_f1_score = 0.9762
+		Epoch 29: 	loss = 0.4370, accuracy = 0.9470, train_f1_score = 0.9312  	val_loss = 0.7803, val_accuracy = 0.8919, val_f1_score = 0.8889
+		Epoch 30: 	loss = 0.4767, accuracy = 0.9536, train_f1_score = 0.9216  	val_loss = 0.5457, val_accuracy = 0.9189, val_f1_score = 0.7879
+	Evaluating :
+		Loss: 0.5457
+
+		TP TN FP FN :11 23 2 1
+		Accuracy: 0.9189
+
+		F1 Score: 0.7879
+
+Mean Validation Accuracy : 0.7926
+
+Mean Validation F1 Score : 0.5391

@@ -9,15 +9,12 @@ from Data import dataset
 
 
 def initialize_parameters_deep(layer_dims):
-
     parameters = {}
     L = len(layer_dims)
-
     for l in range(1, L):
-        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * sqrt(1/layer_dims[l-1])
+        scaling_factor = sqrt(2/layer_dims[l-1])
+        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * scaling_factor
         parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
-
-
     return parameters
 
 
@@ -367,7 +364,7 @@ def train_model(X, Y, layers_dims, optimizer, learning_rate, encoding, num_itera
         v = initialize_velocity(parameters)
     elif optimizer == "adam":
         v, s = initialize_adam(parameters)
-    path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/'
+    path_file = '/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Results/MLP/Numpy'
 
     with open(path_file + name_file, 'a') as file:
         file.write('Parameters :\n')

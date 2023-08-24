@@ -145,6 +145,77 @@ def integer_encoding(file, index_labels):
     return features, labels
 
 
+def integer_encoding_2(file, index_labels):
+    # Consensus B Amino Acid Sequences
+
+    integrase_consensus = "FLDGIDKAQEEHEKYHSNWRAMASDFNLPPVVAKEIVASCDKCQLKGEAMHGQVDCSPGIWQLDCTHLEGKIILVAVHVASGYIEAEVIPAETGQETAYFLLKLAGRWPVKTIHTDNGSNFTSTTVKAACWWAGIKQEFGIPYNPQSQGVVESMNKELKKIIGQVRDQAEHLKTAVQMAVFIHNFKRKGGIGGYSAGERIVDIIATDIQTKELQKQITKIQNFRVYYRDSRDPLWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRDYGKQMAGDDCVASRQDED"
+
+    protease_consensus = "PQITLWQRPLVTIKIGGQLKEALLDTGADDTVLEEMNLPGRWKPKMIGGIGGFIKVRQYDQILIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF"
+
+    RT_consensus = "PISPIETVPVKLKPGMDGPKVKQWPLTEEKIKALVEICTEMEKEGKISKIGPENPYNTPVFAIKKKDSTKWRKLVDFRELNKRTQDFWEVQLGIPHPAGLKKKKSVTVLDVGDAYFSVPLDKDFRKYTAFTIPSINNETPGIRYQYNVLPQGWKGSPAIFQSSMTKILEPFRKQNPDIVIYQYMDDLYVGSDLEIGQHRTKIEELRQHLLRWGFTTPDKKHQKEPPFLWMGYELHPDKWT"
+
+
+    drug_class = file.split("_")[0]
+    if drug_class == 'PI':
+        consensus = protease_consensus
+    elif drug_class == 'INI':
+        consensus = integrase_consensus
+    else:
+        consensus = RT_consensus
+
+
+    start_char = ord('A')
+    end_char = ord('Z')
+    letter_to_int = {chr(letter_code): idx for idx, letter_code in enumerate(range(start_char, end_char + 1))}
+    letter_to_int['.'] = len(letter_to_int)
+    letter_to_int['*'] = len(letter_to_int)
+    letter_to_int['~'] = len(letter_to_int)
+    letter_to_int['#'] = len(letter_to_int)
+
+    print(">>>>>> Reading Dataset :")
+    file_path = str('/home/ed-dahmany/Documents/deep_learning/HIV_Drug_Resistance/Data/' + file)
+
+    features = []
+    labels =[]
+
+    with open(file_path, 'r') as file:
+        i = 0
+        first_line = file.readline().strip().split('\t')
+        feature_name = first_line[1 + index_labels]
+        print("drug class : "+drug_class)
+        next(file) # skip the first line
+        for line in file :
+            line = line.strip().split('\t')
+            if line[1 + index_labels] != 'NA':
+                labels.append(float(line[1 + index_labels]))
+                if len(consensus) == 99:
+                    p_values = line[9:108]  # Extract values from P1 to P99 (9:108 to include P1 to P99)
+                elif len(consensus) == 288:
+                    p_values = line[6: 6 + 288]  # Extract values from P1 to P288
+                else :
+                    if drug_class =='NNRTI':
+                        p_values = line[5: 5 + 240]
+                    elif drug_class == 'NRTI':
+                        p_values = line[7: 7 + 240]
+
+                encoded_sequence = np.array([letter_to_int[c] for c in consensus])
+                for i, value in enumerate(p_values):
+                    # Encoding :
+                    if len(value) != 1:
+                        encoded_sequence[i] = letter_to_int[value[0]]
+                    else :
+                        if value != '-':
+                            encoded_sequence[i] = letter_to_int[value]
+                features.append(encoded_sequence)
+
+    labels = np.where(np.array(labels) < 3.5 , 0, 1)
+    labels = labels.reshape(1, labels.shape[0])
+    features = np.array(features).T
+    print(">>>>>> first sequence : "+str(features[:,0]))
+    return features, labels
+
+
+
 def integer_to_one_hot(X) :
     X = X.T
     X_one_hot = []
